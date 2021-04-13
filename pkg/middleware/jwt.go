@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"ctipo/pkg/utils"
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
@@ -18,7 +19,7 @@ func JWT() gin.HandlerFunc {
 		if token == "" {
 			code = http.StatusPreconditionFailed
 		} else {
-			_, err := util.ParseToken(token)
+			_, err := utils.ParseToken(token)
 			if err != nil {
 				switch err.(*jwt.ValidationError).Errors {
 				case jwt.ValidationErrorExpired:

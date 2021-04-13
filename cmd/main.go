@@ -1,23 +1,21 @@
 package main
 
 import (
-	"ctipo/api"
-
-	"github.com/gin-gonic/gin"
+	"ctipo/pkg/api"
+	"net/http"
+	"time"
 )
 
 func main() {
-	router := gin.Default()
-	usuario := router.Group("/usuario")
-	{
-		usuario.POST("/login", api.LoginUsuario)
+	routerHandler := api.InitRouter()
 
+	server := &http.Server{
+		Addr:           ":8080",
+		Handler:        routerHandler,
+		ReadTimeout:    time.Duration(10 * time.Second),
+		WriteTimeout:   time.Duration(10 * time.Second),
+		MaxHeaderBytes: 1 << 20,
 	}
 
-	paciente := router.Group("/paciente")
-	{
-		paciente.GET("/:id", api.GetPaciente)
-	}
-
-	router.Run()
+	server.ListenAndServe()
 }
