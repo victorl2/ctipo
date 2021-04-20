@@ -1,8 +1,6 @@
 package api
 
 import (
-	"ctipo/pkg/middleware"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,11 +11,15 @@ func InitRouter() *gin.Engine {
 
 	//Routes used in the application
 	api := router.Group("/api/")
-	api.Use(middleware.JWT())
+	//api.Use(middleware.JWT())
 	{
-		api.GET("/paciente/:id", GetPaciente)
+		api.GET("/paciente/:prontuario", GetPacienteHandler)
+		api.GET("/paciente/busca/:query", BuscarPacientesHandler)
 		api.GET("/usuario/:email", GetUsuario)
 	}
+
+	//public := router.Group("/public")
+	//public.GET("/aa", GetPaciente)
 
 	return router
 }
