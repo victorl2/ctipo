@@ -1,5 +1,6 @@
 # CTIPO
+The backend server for the ctipo application
 
 
-
-+ github.com/dgrijalva/jwt-go
+## Usage
+Start the server with `go run main.go`
