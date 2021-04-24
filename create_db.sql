@@ -10,4 +10,21 @@ create table Paciente (
 );
 
 alter table if exists Paciente
-   add constraint UK_oc81nc6ig2dvu5ydf5kvak78d unique (prontuario);
+   add constraint UNIQUE_PRONTUARIO unique (prontuario);
+
+create table Endereco (
+    id int8 not null,
+    bairro varchar(255),
+    cep varchar(255),
+    cidade varchar(255),
+    complemento varchar(255),
+    numero int4,
+    ponto_referencia varchar(255),
+    rua varchar(255),
+    primary key (id)
+);
+
+alter table if exists Paciente
+   add constraint FK_ENDERECO_DO_PACIENTE
+   foreign key (id_endereco)
+   references Endereco;
